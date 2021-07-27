@@ -9,8 +9,8 @@ public class AppTest {
 	
     @Test
     public void compraQtdMaiorEstoqueTest() {
-    	Produto p1 = new Produto("Refrigerante",6,10);
     	
+    	Produto p1 = new Produto("Refrigerante",6,10);
     	Cliente c1 = new Cliente("Lucas",1200);
     	
 		Exception exception = assertThrows(RuntimeException.class, () -> {
@@ -22,8 +22,8 @@ public class AppTest {
     
     @Test
     public void qtdDinheiroMenorValorProdutoTest() {
-    	Produto p1 = new Produto("Refrigerante",6,10);
     	
+    	Produto p1 = new Produto("Refrigerante",6,10);
     	Cliente c1 = new Cliente("Lucas",5);
     	
 		Exception exception = assertThrows(RuntimeException.class, () -> {
