@@ -1,3 +1,3 @@
-#  kaki
+#  Vendinha
 
-Projeto em maven
+Praticando POO e testes em JUnit 5
