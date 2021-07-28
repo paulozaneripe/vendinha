@@ -1,17 +1,20 @@
 package br.com.paulo.vendinha;
 
 import java.math.BigDecimal;
+import java.util.SplittableRandom;
 
 public class Produto {
 	
 	private String nome;
 	private BigDecimal valor;
 	private Integer estoque;
+	private Long id;
 	
-	public Produto(String nome, int valor, int estoque) {
+	public Produto(String nome, BigDecimal valor, int estoque) {
 		this.nome = nome;
-		this.valor =  BigDecimal.valueOf(valor);
+		this.valor =  valor;
 		this.estoque = estoque;
+		this.id = new SplittableRandom().nextLong(1, 10);
 	}
 
 	public String getNome() {
@@ -40,5 +43,9 @@ public class Produto {
 	
 	public void subtrairEstoque(int valor) {
 		estoque -= valor;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 }
