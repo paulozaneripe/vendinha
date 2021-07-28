@@ -10,11 +10,16 @@ public class App {
     	Produto p3 = new Produto("Café",4,70);
     	
     	Cliente c1 = new Cliente("Lucas",1200);
+    	Cliente c2 = new Cliente("Pedro",600);
     	
     	c1.comprar(p3, 70);
     	c1.comprar(p2, 30);
     	c1.comprar(p2, 5);
     	c1.comprar(p1, 1);
     	c1.listarCompras();
+    	
+    	c2.comprar(p1, 5);
+    	c2.comprar(p1, 44);
+    	c2.listarCompras();
     }
 }

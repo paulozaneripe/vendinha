@@ -21,7 +21,7 @@ public class AppTest {
     }
     
     @Test
-    public void qtdDinheiroMenorValorProdutoTest() {
+    public void compraDinheiroInsuficienteTest() {
     	
     	Produto p1 = new Produto("Refrigerante",6,10);
     	Cliente c1 = new Cliente("Lucas",5);

@@ -45,11 +45,14 @@ public class Cliente {
 	public void listarCompras() {
 		Integer i = 0;
 		
+		System.out.println("Lista de compras de " + nome + "\n");
+		
 		if(compras.size() > 0 && !compras.isEmpty()) {
 			for(Compra c : compras) {
 				i++;
-				System.out.println("Compra " + (i) + " - [Produto: " + c.getProduto() + ", Qtd: " + c.getQtd() + ", Preço: R$ " + c.getValorProduto() + ", Total: R$ " + c.getTotal() + "]\n");
+				System.out.println(i + "ª Compra - [Produto: " + c.getProduto() + ", Qtd: " + c.getQtd() + ", Preço: R$ " + c.getValorProduto() + ", Total: R$ " + c.getTotal() + "]");
 			}
+			System.out.print("\n");
 		} else {
 			System.err.println("Nenhuma compra efetuda por " + nome);
 		}
