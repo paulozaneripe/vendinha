@@ -42,7 +42,7 @@ public class Produto {
 	}
 	
 	public void subtrairEstoque(int valor) {
-		estoque -= valor;
+		estoque = estoque - valor;
 	}
 	
 	public Long getId() {
