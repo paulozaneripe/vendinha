@@ -2,6 +2,7 @@ package br.com.paulo.vendinha;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.SplittableRandom;
 
@@ -38,8 +39,8 @@ public class Pedido {
 		return id;
 	}
 	
-	public void getStatus() {
-		System.out.println("Status do pedido " + id + ": " + status.toString() + "\n");
+	public EnumStatusPagamento getStatus() {
+		return status;
 	}
 	
 	public Compra pagar(Cliente cliente, BigDecimal dinheiro) {
@@ -57,6 +58,14 @@ public class Pedido {
 	}
 	
 	public void cancelarPedido() {
-		status = EnumStatusPagamento.CANCELADO;
+		if(itens.size() > 0 && !itens.isEmpty()) {
+			for (Iterator<ItemCompra> it = itens.iterator(); it.hasNext();) {
+				ItemCompra proximoItem = it.next();
+			
+				proximoItem.getProduto().adicionarEstoque(proximoItem.getQtd());
+			}
+		
+			status = EnumStatusPagamento.CANCELADO;
+		}
 	}
 }

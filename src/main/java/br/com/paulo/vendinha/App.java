@@ -12,32 +12,27 @@ public class App {
     	
     	Cliente c1 = new Cliente("Lucas",1200);
     	
+    	
     	c1.adicionarAoCarrinho(p1, 30);
     	c1.adicionarAoCarrinho(p2, 20);
-    	
     	Pedido pd1 = c1.fazerPedido(c1.getCarrinho());
-    	
-    	pd1.getStatus();
-    	
     	c1.comprar(pd1, BigDecimal.valueOf(500));
-    	c1.listarCompras();
     	
-    	pd1.getStatus();
+    	c1.listarCompras();
     	
     	c1.adicionarAoCarrinho(p3, 40);
     	c1.adicionarAoCarrinho(p2, 5);
     	c1.adicionarAoCarrinho(p1, 20);
     	c1.removerDoCarrinho(p1);
-    	
     	Pedido pd2 = c1.fazerPedido(c1.getCarrinho());
-    	
     	c1.comprar(pd2, BigDecimal.valueOf(500));
+    	
     	c1.listarCompras();
     	
-    	c1.adicionarAoCarrinho(p1, 19);
+    	c1.adicionarAoCarrinho(p1, 20);
     	Pedido pd3 = c1.fazerPedido(c1.getCarrinho());
-
     	c1.comprar(pd3, BigDecimal.valueOf(500));
+    	
     	c1.listarCompras();    	
     }
 }

@@ -25,12 +25,15 @@ public class Cliente {
 	public ItemCompra adicionarAoCarrinho(Produto produto, int qtd) {
 		
 		if(qtd <= produto.getEstoque()) {
-			produto.subtrairEstoque(qtd);
-			ItemCompra itemCompra = new ItemCompra(produto, qtd);
-			carrinho.add(itemCompra);
-			return itemCompra;
+			if(qtd > 0) {
+				produto.subtrairEstoque(qtd);
+				ItemCompra itemCompra = new ItemCompra(produto, qtd);
+				carrinho.add(itemCompra);
+				return itemCompra;
+			}
+			throw new RuntimeException("Você informou uma quantidade inválida para o produto " + produto.getNome() + "!");
 		}
-			
+
 		throw new RuntimeException("O produto " + produto.getNome() + " não possui estoque suficiente para essa quantidade!");
 	}
 	
@@ -39,9 +42,9 @@ public class Cliente {
 		if(carrinho.size() > 0 && !carrinho.isEmpty()) {
 			for (Iterator<ItemCompra> it = carrinho.iterator(); it.hasNext();) {
 				ItemCompra proximoItem = it.next();
-	            if(proximoItem.getProduto().getId().equals(produto.getId())) {
-	                it.remove();
+	            if(proximoItem.getProduto().getNome().equals(produto.getNome())) {
 	                proximoItem.getProduto().adicionarEstoque(proximoItem.getQtd());
+	                it.remove();
 	                return proximoItem;
 	            }
 			}
@@ -55,7 +58,7 @@ public class Cliente {
 	public Pedido fazerPedido(List<ItemCompra> carrinho) {
 		
 		if(carrinho.size() > 0 && !carrinho.isEmpty()) {
-			BigDecimal valorTotal = BigDecimal.valueOf(0);
+			BigDecimal valorTotal = BigDecimal.ZERO;
 			
 			for(ItemCompra item : carrinho) {
 				valorTotal = valorTotal.add(item.getProduto().getValor().multiply(BigDecimal.valueOf(item.getQtd())));
@@ -71,7 +74,7 @@ public class Cliente {
 	}
 	
 	public Compra comprar(Pedido pedido, BigDecimal dinheiro) {
-		BigDecimal troco = BigDecimal.valueOf(0);
+		BigDecimal troco = BigDecimal.ZERO;
 		
 		if(qtdDinheiro.compareTo(dinheiro) >= 0) {
 			qtdDinheiro = qtdDinheiro.subtract(dinheiro);
@@ -80,7 +83,6 @@ public class Cliente {
 		
 			Compra compra = pedido.pagar(this, dinheiro);
 			compras.add(compra);
-			System.out.println("Compra efetuada do pedido " + pedido.getId() + " por " + nome + " - Troco: " + troco + "\n");
 			return compra;
 		}
 		
@@ -114,12 +116,11 @@ public class Cliente {
 	}
 	
 	public void listarCompras() {		
-		System.out.print("------------------------------------------------------\n\n");
 		System.out.println("Lista de compras de " + nome + "\n");
 		
 		if(compras.size() > 0 && !compras.isEmpty()) {
 			for(Compra compra : compras) {
-				System.out.println("Compra " + compra.getId() + " | Itens: " + compra.getItens().size() + " | Total: R$ " + compra.getValorTotal());
+				System.out.println("Compra " + compra.getId() + " - Total: R$ " + compra.getValorTotal());
 				for(ItemCompra item : compra.getItens()) {
 					System.out.println("[Produto " + item.getProduto().getId() + ": " +
 					item.getProduto().getNome() + ", Qtd: " +
@@ -129,7 +130,6 @@ public class Cliente {
 				}
 				System.out.print("\n");
 			}
-			System.out.print("------------------------------------------------------\n\n");
 		} else {
 			System.err.println("Nenhuma compra efetuda por " + nome);
 		}

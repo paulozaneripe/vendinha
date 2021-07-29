@@ -37,11 +37,11 @@ public class Produto {
 		this.valor = BigDecimal.valueOf(valor);
 	}
 	
-	public void adicionarEstoque(int valor) {
-		estoque += valor;
+	public void adicionarEstoque(Integer valor) {
+		estoque = estoque + valor;
 	}
 	
-	public void subtrairEstoque(int valor) {
+	public void subtrairEstoque(Integer valor) {
 		estoque = estoque - valor;
 	}
 	
